@@ -49,29 +49,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 return child!;
               } else if (_userListWrapper != null) {
                 return RefreshIndicator(
-                    onRefresh: () async {
-                      setState(() {
-                        showLoader = true;
-                      });
-                      _userListWrapper = await _callsProvider.getUserList();
-                      setState(() {
-                        showLoader = false;
-                      });
+                  onRefresh: () async {
+                    setState(() {
+                      showLoader = true;
+                    });
+                    _userListWrapper = await _callsProvider.getUserList();
+                    setState(() {
+                      showLoader = false;
+                    });
+                  },
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      UserLisData user = _userListWrapper!.data![index];
+                      return ListTile(
+                        title: Text(user.firstName!),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(user.avatar!),
+                        ),
+                        subtitle: Text(user.email!),
+                      );
                     },
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        UserLisData user = _userListWrapper!.data![index];
-                        return ListTile(
-                          title: Text(user.firstName!),
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.network(user.avatar!),
-                          ),
-                          subtitle: Text(user.email!),
-                        );
-                      },
-                      itemCount: _userListWrapper!.data!.length,
-                    ));
+                    itemCount: _userListWrapper!.data!.length,
+                  ),
+                );
               } else {
                 return ErrorComponent(
                   message: "${consumer.error}",
