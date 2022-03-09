@@ -4,18 +4,23 @@ import 'package:sample_network_calls/services/networks/dio_api_services.dart';
 import 'package:sample_network_calls/wrappers/user_list_wrapper.dart';
 
 class SampleCallsProvider extends ChangeNotifier {
+  late UserListWrapper? userListWrapper;
   late String error;
+  bool showLoader = true;
   Future<UserListWrapper?> getUserList() async {
     try {
       var res = await DioApiServices().getRequest(
         HTTPConstants.getListOfUser,
       );
-      notifyListeners();
-      return UserListWrapper.fromJson(res);
+      userListWrapper = UserListWrapper.fromJson(res);
     } catch (e) {
-      print(e);
       error = e.toString();
-      notifyListeners();
     }
+    changeLoaderState(false);
+  }
+
+  changeLoaderState(bool loaderState) {
+    showLoader = loaderState;
+    notifyListeners();
   }
 }

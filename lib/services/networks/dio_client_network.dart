@@ -9,8 +9,10 @@ class DioClientNetwork {
   initializeDioClientNetwork() async {
     dio = Dio();
     dio.options = setBaseOptions();
-    dio.interceptors.add(LogInterceptor(
-        request: true, responseBody: true, requestBody: true, error: true));
+    dio.interceptors.add(
+      LogInterceptor(
+          request: true, responseBody: true, requestBody: true, error: true),
+    );
     dio.interceptors.add(
       InterceptorsWrapper(
           onRequest: requestInterceptor, onError: errorInterceptor),
@@ -31,7 +33,7 @@ class DioClientNetwork {
     if (authToken == null) {
       var _token = await SharedPreferencesService()
           .getStringFromSF(SharedPreferenceConstants.apiAuthToken);
-          
+
       if (_token != null) {
         authToken = _token;
         dio.options.headers["Authorization"] = "Bearer " + authToken!;
@@ -54,14 +56,3 @@ class DioClientNetwork {
     handler.next(dioError);
   }
 }
-
-
-    // if (authToken == null) {
-    //   var _token = await SharedPreferencesService()
-    //       .getStringFromSF(SharedPreferenceConstants.apiAuthToken);
-    //   if (_token != null) {
-    //     dio.options.headers["token"] = authToken = _token;
-    //   } else {
-    //     dio.options.headers["token"] = null;
-    //   }
-    // }
