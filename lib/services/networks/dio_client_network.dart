@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:sample_network_calls/constants/routes/route_constants.dart';
 import 'package:sample_network_calls/constants/strings/http_constants.dart';
 import 'package:sample_network_calls/constants/strings/shared_preference_constants.dart';
+import 'package:sample_network_calls/main.dart';
+import 'package:sample_network_calls/services/navigation_services.dart';
 import 'package:sample_network_calls/services/shared_preferences_service.dart';
 
 class DioClientNetwork {
@@ -50,8 +54,11 @@ class DioClientNetwork {
       DioError dioError, ErrorInterceptorHandler handler) async {
     if (dioError.message.contains("ERROR_001")) {
       // this will push a new route and remove all the routes that were present
-      // navigatorKey.currentState.pushNamedAndRemoveUntil(
-      //     "/login", (Route<dynamic> route) => false);
+      serviceLocatorInstance<NavigationService>()
+          .navigatorKey
+          .currentState
+          ?.pushNamedAndRemoveUntil(
+              RouteConstants.splashScreen, (Route<dynamic> route) => false);
     }
     handler.next(dioError);
   }

@@ -2,15 +2,6 @@
 ///  cases are written on these constant in [lib/routes.dart]
 
 class RouteConstants {
-  static const String createAccountScreen = 'CreateAccountScreen';
-  static const String loginScreen = 'LoginScreen';
-  static const String loginSignupScreen = 'LoginSignupScreen';
-  static const String findSchoolScreen = 'FindSchoolScreen';
-  static const String verifyAccount = 'VerifyAccount';
-  static const String selectGradeAndMajorScreen = 'SelectGradeAndMajorScreen';
-  static const String joinGroupScreen = 'JoinGroupScreen';
-  static const String bottomNavigationScreen = 'BottomNavigationScreen';
-  static const String feedMainScreen = 'HomeFeedScreen';
-  static const String postDetailScreen = 'PostDetailScreen';
-  static const String selectGroupForPostScreen = 'SelectGroupForPostScreen';
+  static const String splashScreen = 'SplashScreen';
+  static const String homeScreen = 'HomeScreen';
 }
