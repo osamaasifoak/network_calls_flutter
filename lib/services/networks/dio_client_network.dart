@@ -55,10 +55,7 @@ class DioClientNetwork {
     if (dioError.message.contains("ERROR_001")) {
       // this will push a new route and remove all the routes that were present
       serviceLocatorInstance<NavigationService>()
-          .navigatorKey
-          .currentState
-          ?.pushNamedAndRemoveUntil(
-              RouteConstants.splashScreen, (Route<dynamic> route) => false);
+          .pushNamedAndRemoveUntil(RouteConstants.splashScreen);
     }
     handler.next(dioError);
   }
