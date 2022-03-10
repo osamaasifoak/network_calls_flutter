@@ -30,7 +30,8 @@ class HomeScreen extends StatelessWidget {
             builder: (context, consumer, child) {
               if (consumer.showLoader) {
                 return child!;
-              } else if (consumer.userListWrapper != null) {
+              } else if (consumer.userListWrapper != null &&
+                  consumer.error == null) {
                 return RefreshIndicator(
                     onRefresh: () async {
                       consumer.changeLoaderState(true);
@@ -44,7 +45,12 @@ class HomeScreen extends StatelessWidget {
                           title: Text(user.firstName!),
                           leading: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
-                            child: Image.network(user.avatar!),
+                            child: Image.network(
+                              user.avatar!,
+                              width: 60,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           subtitle: Text(user.email!),
                         );
