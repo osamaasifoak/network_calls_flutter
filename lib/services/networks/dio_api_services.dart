@@ -1,9 +1,6 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:sample_network_calls/constants/strings/error_messages_constants.dart';
 import 'package:sample_network_calls/main.dart';
 import 'package:sample_network_calls/services/networks/dio_client_network.dart';
-import 'package:sample_network_calls/wrappers/error_response_wrapper.dart';
 
 class DioApiServices {
   Future<dynamic> getRequest(
@@ -22,12 +19,8 @@ class DioApiServices {
             onReceiveProgress: onReceiveProgress,
           );
       return response.data;
-    } on SocketException catch (_) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     } on DioError catch (err) {
       return _returnDioErrorResponse(err);
-    } catch (e) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     }
   }
 
@@ -52,12 +45,8 @@ class DioApiServices {
                 onReceiveProgress: onReceiveProgress,
               );
       return response.data;
-    } on SocketException catch (_) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     } on DioError catch (err) {
       return _returnDioErrorResponse(err);
-    } catch (e) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     }
   }
 
@@ -82,12 +71,8 @@ class DioApiServices {
                 onReceiveProgress: onReceiveProgress,
               );
       return response.data;
-    } on SocketException catch (_) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     } on DioError catch (err) {
       return _returnDioErrorResponse(err);
-    } catch (e) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     }
   }
 
@@ -110,12 +95,8 @@ class DioApiServices {
                 cancelToken: cancelToken,
               );
       return response.data;
-    } on SocketException catch (_) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     } on DioError catch (err) {
       return _returnDioErrorResponse(err);
-    } catch (e) {
-      return OnErrorWrapper(message: ErrorMessagesConstants.somethingWentWrong);
     }
   }
 
